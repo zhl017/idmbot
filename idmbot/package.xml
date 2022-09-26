@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>idmbot</name>
+  <version>0.0.1</version>
+  <description>
+    The idmbot package
+  </description>
+  <license>Apache 2.0</license>
+  <author email="william.lee@idminer.com.tw">William L</author>
+  <maintainer email="william.lee@idminer.com.tw">William L</maintainer>  
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>idmbot_libs</exec_depend>
+  <exec_depend>idmbot_bringup</exec_depend>
+  <export><metapackage/></export>
+</package>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>idmbot_core</name>
+  <version>0.0.1</version>
+  <description>
+  The idmbot_core package
+  </description>
+  <license>Apache 2.0</license>
+  <author email="william.lee@idminer.com.tw">William L</author>
+  <maintainer email="william.lee@idminer.com.tw">William L</maintainer>  
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>cmake_modules</depend>
+  <depend>roscpp</depend>
+  <depend>idmbot_libs</depend>
+</package>
