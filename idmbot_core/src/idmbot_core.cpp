@@ -180,8 +180,9 @@ void idmbot_core::calcOdom(double diff_time)
     if (isnan(wheel_r))
         wheel_r = 0.0;
 
-    delta_s     = WHEEL_RADIUS * (wheel_r + wheel_l) / 2.0;
-    theta = WHEEL_RADIUS * (theta_r - theta_l) / WHEEL_SEPARATION;  
+    delta_s     = WHEEL_RADIUS * (wheel_r + wheel_l) / 2.0; //計算弧長
+
+    theta = WHEEL_RADIUS * (theta_r - theta_l) / WHEEL_SEPARATION;
     // orientation = sensors.getOrientation();
     // theta       = atan2f(orientation[1]*orientation[2] + orientation[0]*orientation[3], 
     //                 0.5f - orientation[2]*orientation[2] - orientation[3]*orientation[3]);
@@ -189,8 +190,10 @@ void idmbot_core::calcOdom(double diff_time)
     delta_theta = theta - last_theta;
 
     // compute odometric pose
-    odom_pose[0] += delta_s * cos(odom_pose[2] + (delta_theta / 2.0));
-    odom_pose[1] += delta_s * sin(odom_pose[2] + (delta_theta / 2.0));
+    // odom_pose[0] += delta_s * cos(odom_pose[2] + (delta_theta / 2.0));
+    // odom_pose[1] += delta_s * sin(odom_pose[2] + (delta_theta / 2.0));
+    odom_pose[0] += delta_s * cos(delta_theta);
+    odom_pose[1] += delta_s * sin(delta_theta);
     odom_pose[2] += delta_theta;
 
     // compute odometric instantaneouse velocity
