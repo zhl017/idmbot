@@ -24,6 +24,8 @@ bool idmbot_arm::init()
         dxl_.ping(joint_id_[num]);
         dxl_.torqueOff(joint_id_[num]);
         dxl_.setOperatingMode(joint_id_[num], 3);
+        dxl_.itemWrite(joint_id_[num], "CW_Angle_Limit", joint_pos_limit[num][0]);
+        dxl_.itemWrite(joint_id_[num], "CCW_Angle_Limit", joint_pos_limit[num][1]);
         dxl_.torqueOn(joint_id_[num]);
     }
 
@@ -32,8 +34,20 @@ bool idmbot_arm::init()
         dxl_.ping(gripper_id_[num]);
         dxl_.torqueOff(gripper_id_[num]);
         dxl_.setOperatingMode(gripper_id_[num], 3);
+        dxl_.itemWrite(gripper_id_[num], "CW_Angle_Limit", gripper_pos_limit[num][0]);
+        dxl_.itemWrite(gripper_id_[num], "CCW_Angle_Limit", gripper_pos_limit[num][1]);
         dxl_.torqueOn(gripper_id_[num]);
     }
+
+    double joint_velocity[JOINT_CNT] = {0.8};
+    double joint_position[JOINT_CNT] = {1.5};
+    double gripper_velocity[GRIPPER_CNT] = {0.8, 0.8};
+    double gripper_position[GRIPPER_CNT] = {0.0, 0.0};
+
+    setJointVelocity(joint_velocity);
+    setJointPosition(joint_position);
+    setGripperVelocity(gripper_velocity);
+    setGripperPosition(gripper_position);
 
     torque_state_ = true;
 

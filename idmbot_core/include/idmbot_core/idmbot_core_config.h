@@ -19,8 +19,8 @@
 
 #include <math.h>
 
-#define WHEEL_RADIUS            0.033           // 車輪半徑
-#define WHEEL_SEPARATION        0.287           // 輪距
+#define WHEEL_RADIUS            0.055           // 車輪半徑
+#define WHEEL_SEPARATION        0.0165          // 輪距
 #define TURNING_RADIUS          0.1435          // 旋轉半徑
 #define ROBOT_RADIUS            0.1435          // 車身半徑
 
@@ -35,8 +35,8 @@
 #define JOINT_CONTROL_FREQUENCY                 100     // hz
 
 #define WHEEL_NUM                               2
-#define JOINT_CNT                               4
-#define GRIPPER_CNT                             1
+#define JOINT_CNT                               1
+#define GRIPPER_CNT                             2
 
 #define LEFT                                    0
 #define RIGHT                                   1
@@ -72,6 +72,16 @@ private:
 
     void cb_reset(const std_msgs::Empty &msg);
     ros::Subscriber reset_sub;
+
+    void cb_joint_velocity(const std_msgs::Float64MultiArray &msg);
+    ros::Subscriber joint_velocity_sub;
+    void cb_joint_position(const std_msgs::Float64MultiArray &msg);
+    ros::Subscriber joint_position_sub;
+
+    void cb_gripper_velocity(const std_msgs::Float64MultiArray &msg);
+    ros::Subscriber gripper_velocity_sub;
+    void cb_gripper_position(const std_msgs::Float64MultiArray &msg);
+    ros::Subscriber gripper_positoin_sub;
 
     // Function
     void updateInfo(void);

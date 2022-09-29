@@ -16,9 +16,13 @@ void idmbot_core::process(void)
     cmd_vel_sub = nh.subscribe("cmd_vel", 10, &idmbot_core::cb_cmd_vel, this);
     dxl_power_sub = nh.subscribe("dxl_power", 10, &idmbot_core::cb_dxl_power, this);
     reset_sub = nh.subscribe("reset", 10, &idmbot_core::cb_reset, this);
+    joint_velocity_sub = nh.subscribe("joint_velocity", 10, &idmbot_core::cb_joint_velocity, this);
+    joint_position_sub = nh.subscribe("joint_position", 10, &idmbot_core::cb_joint_position, this);
+    gripper_velocity_sub = nh.subscribe("gripper_velocity", 10, &idmbot_core::cb_gripper_velocity, this);
+    gripper_positoin_sub = nh.subscribe("gripper_position", 10, &idmbot_core::cb_gripper_position, this);
 
     wheel_driver.init();
-    // arm_driver.init();
+    arm_driver.init();
 
     current_time = ros::Time::now();
     last_time = ros::Time::now();
@@ -28,8 +32,6 @@ void idmbot_core::process(void)
     if (initJointstates() == true) ROS_INFO("Init JointStates.");
 
     ros::Rate r = 10;
-
-    
 
     while(ros::ok())
     {
@@ -78,6 +80,54 @@ void idmbot_core::cb_dxl_power(const std_msgs::Bool &msg)
 
     wheel_driver.setTorque(dxl_power);
     // arm_driver.setTorque(dxl_power);
+}
+
+void idmbot_core::cb_joint_velocity(const std_msgs::Float64MultiArray &msg)
+{
+    double goal_velocity[JOINT_CNT];
+
+    for ( uint8_t num = 0; num < JOINT_CNT; num++ )
+    {
+        goal_velocity[num] = msg.data[num];
+    }
+
+    arm_driver.setJointVelocity(goal_velocity);
+}
+
+void idmbot_core::cb_joint_position(const std_msgs::Float64MultiArray &msg)
+{
+    double goal_position[JOINT_CNT];
+
+    for ( uint8_t num = 0; num < JOINT_CNT; num++ )
+    {
+        goal_position[num] = msg.data[num];
+    }
+
+    arm_driver.setJointPosition(goal_position);
+}
+
+void idmbot_core::cb_gripper_velocity(const std_msgs::Float64MultiArray &msg)
+{
+    double goal_velocity[GRIPPER_CNT];
+
+    for ( uint8_t num = 0; num < GRIPPER_CNT; num++ )
+    {
+        goal_velocity[num] = msg.data[num];
+    }
+
+    arm_driver.setGripperVelocity(goal_velocity);
+}
+
+void idmbot_core::cb_gripper_position(const std_msgs::Float64MultiArray &msg)
+{
+    double goal_position[GRIPPER_CNT];
+
+    for ( uint8_t num = 0; num < GRIPPER_CNT; num++ )
+    {
+        goal_position[num] = msg.data[num];
+    }
+
+    arm_driver.setGripperPosition(goal_position);
 }
 
 void idmbot_core::updateInfo(void)

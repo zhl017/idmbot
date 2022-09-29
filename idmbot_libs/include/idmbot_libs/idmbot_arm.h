@@ -4,16 +4,14 @@
 #include <dynamixel_workbench_toolbox/dynamixel_workbench.h>
 
 #define DEVICENAME     "/dev/ttyUSB0"
-#define BAUDRATE        1000000
+#define BAUDRATE        57600
 
 #define JOINT_1         1
-#define JOINT_2         2
-#define JOINT_3         3
-#define JOINT_4         4
-#define JOINT_CNT       4
+#define JOINT_CNT       1
 
-#define GRIPPER_ID      5
-#define GRIPPER_CNT     1
+#define GRIPPER_1       2
+#define GRIPPER_2       3
+#define GRIPPER_CNT     2
 
 class idmbot_arm
 {
@@ -21,8 +19,11 @@ private:
     DynamixelWorkbench dxl_;
 
     bool torque_state_;
-    uint8_t joint_id_[JOINT_CNT] = {JOINT_1, JOINT_2, JOINT_3, JOINT_4};
-    uint8_t gripper_id_[GRIPPER_CNT] = {GRIPPER_ID};
+    uint8_t joint_id_[JOINT_CNT] = {JOINT_1};
+    int joint_pos_limit[JOINT_CNT][2] = {512, 820};
+    uint8_t gripper_id_[GRIPPER_CNT] = {GRIPPER_1, GRIPPER_2};
+    int gripper_pos_limit[GRIPPER_CNT][2] = {{260, 412},
+                                                 {612, 912}};
 
 public:
     idmbot_arm();
