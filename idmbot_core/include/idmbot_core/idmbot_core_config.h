@@ -19,13 +19,13 @@
 
 #include <math.h>
 
-#define WHEEL_RADIUS            0.055           // 車輪半徑
-#define WHEEL_SEPARATION        0.0165          // 輪距
-#define TURNING_RADIUS          0.1435          // 旋轉半徑
-#define ROBOT_RADIUS            0.1435          // 車身半徑
+#define WHEEL_RADIUS            0.033           // 車輪半徑
+#define WHEEL_SEPARATION        0.160           // 輪距
+#define TURNING_RADIUS          0.153           // 旋轉半徑
+#define ROBOT_RADIUS            0.153           // 車身半徑
 
 #define MAX_LINEAR_VELOCITY     ( WHEEL_RADIUS * 2 * 3.14159265359 * 46 / 60 ) // RPM = 0.15 m/s 
-#define MAX_ANGULAR_VELOCITY    ( MAX_LINEAR_VELOCITY / TURNING_RADIUS)        // rad/s 
+#define MAX_ANGULAR_VELOCITY    ( MAX_LINEAR_VELOCITY / TURNING_RADIUS)        // VEL = 0.98 rad/s 
 
 #define MIN_LINEAR_VELOCITY     -MAX_LINEAR_VELOCITY
 #define MIN_ANGULAR_VELOCITY    -MAX_ANGULAR_VELOCITY
