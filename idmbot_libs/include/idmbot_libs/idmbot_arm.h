@@ -4,7 +4,7 @@
 #include <dynamixel_workbench_toolbox/dynamixel_workbench.h>
 
 #define DEVICENAME     "/dev/ttyUSB0"
-#define BAUDRATE        57600
+#define BAUDRATE        1000000
 
 #define JOINT_1         1
 #define JOINT_CNT       1

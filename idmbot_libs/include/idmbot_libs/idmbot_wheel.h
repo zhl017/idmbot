@@ -3,7 +3,7 @@
 
 #include <dynamixel_workbench_toolbox/dynamixel_workbench.h>
 
-#define BAUDRATE                    57600
+#define BAUDRATE                    1000000
 #define DEVICENAME                  "/dev/ttyUSB0"
 
 #define LIMIT_MAX_VELOCITY          200
